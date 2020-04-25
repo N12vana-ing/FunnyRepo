@@ -1,4 +1,4 @@
-package com.zykspring.funnycore.excetion;
+package com.zykspring.funnycore.exception;
 
 public class ServiceException extends BaseException{
 

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.zykspring.funnycore.base.BaseDTO;
 import com.zykspring.funnycore.util.Dates;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -14,12 +15,16 @@ import java.util.Date;
  * @author bojiangzhou 2017-12-31
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@Table(name = "sys_user")
 public class User extends BaseDTO {
     private static final long serialVersionUID = -7395431342743009038L;
 
     /**
      * 用户ID
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @OrderBy("DESC")
     private Long userId;
     /**
      * 用户名
@@ -46,6 +51,7 @@ public class User extends BaseDTO {
      * 是否启用：1/0
      */
     private Integer enabled;
+
 
     public Long getUserId() {
         return userId;

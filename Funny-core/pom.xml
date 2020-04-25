@@ -126,12 +126,12 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
-            <version>5.1.25</version>
+            <version>8.0.19</version>
         </dependency>
 
         <dependency>
             <groupId>javax.persistence</groupId>
-            <artifactId>persistence.api</artifactId>
+            <artifactId>persistence-api</artifactId>
             <version>1.0</version>
         </dependency>
 
@@ -147,11 +147,6 @@
             <version>4.0.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>pagehelper</groupId>
-            <artifactId>pagehelper.spring.boot.starter</artifactId>
-            <version>5.1.6</version>
-        </dependency>
     </dependencies>
 
     <build>

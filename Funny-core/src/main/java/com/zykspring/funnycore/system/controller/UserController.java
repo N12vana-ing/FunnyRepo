@@ -5,12 +5,13 @@ import com.zykspring.funnycore.base.BaseController;
 import com.zykspring.funnycore.constants.BaseEnums;
 import com.zykspring.funnycore.base.Result;
 import com.zykspring.funnycore.system.dto.User;
+import com.zykspring.funnycore.system.service.UserService;
 import com.zykspring.funnycore.util.Dates;
 import com.zykspring.funnycore.util.Results;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,42 +25,44 @@ import java.util.List;
 @RestController
 public class UserController extends BaseController {
 
-    private static List<User> userList = new ArrayList<>();
+    @Autowired
+    private UserService userService;
 
-    // 先静态模拟数据
-    static {
-        User user1 = new User();
-        user1.setUserId(1L);
-        user1.setUsername("lufei");
-        user1.setNickname("蒙奇D路飞");
-        user1.setBirthday(Dates.parseDate("2000-05-05"));
-        user1.setSex(Constants.Sex.MALE);
-        user1.setEnabled(Constants.Flag.YES);
-        userList.add(user1);
 
-        User user2 = new User();
-        user2.setUserId(2L);
-        user2.setUsername("nami");
-        user2.setNickname("娜美");
-        user2.setBirthday(Dates.parseDate("2000/7/3"));
-        user2.setSex(Constants.Sex.FEMALE);
-        user2.setEnabled(Constants.Flag.YES);
-        userList.add(user2);
-    }
-
-    @RequestMapping("/queryAll")
+    @PostMapping("/queryAll")
     public Result queryAll(){
-        return Results.successWithData(userList, BaseEnums.SUCCESS.code(), BaseEnums.SUCCESS.desc());
+        List<User> list = userService.selectAll();
+        return Results.successWithData(list, BaseEnums.SUCCESS.code(), BaseEnums.SUCCESS.desc());
     }
 
     @RequestMapping("/queryOne/{userId}")
     public Result queryOne(@PathVariable Long userId){
-        User user = null;
-        for(User u : userList){
-            if(u.getUserId().longValue() == userId){
-                user = u;
-            }
-        }
+        User user = userService.get(userId);
         return Results.successWithData(user);
     }
+
+    @PostMapping("/save")
+    public Result save(@Valid @RequestBody User user){
+        user = userService.insertSelective(user);
+        return Results.successWithData(user);
+    }
+
+    @PostMapping("/update")
+    public Result update(@Valid @RequestBody List<User> user){
+        user = userService.persistSelective(user);
+        return Results.successWithData(user);
+    }
+
+    @RequestMapping("/delete")
+    public Result delete(User user){
+        userService.delete(user);
+        return Results.success();
+    }
+
+    @RequestMapping("/delete/{userId}")
+    public Result delete(@PathVariable Long userId){
+        userService.delete(userId);
+        return Results.success();
+    }
+
 }
