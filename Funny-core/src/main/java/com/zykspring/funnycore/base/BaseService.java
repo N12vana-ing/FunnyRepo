@@ -4,6 +4,8 @@ import com.zykspring.funnycore.Constants;
 import com.zykspring.funnycore.constants.Contants;
 import com.zykspring.funnycore.exception.UpdateFailedException;
 import com.zykspring.funnycore.util.Reflections;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -15,6 +17,8 @@ import java.util.List;
 
 
 public abstract class BaseService<T> implements Service<T> {
+
+    private static final Logger log = LoggerFactory.getLogger(BaseService.class);
 
     @Autowired
     private Mapper<T> mapper;
@@ -220,6 +224,7 @@ public abstract class BaseService<T> implements Service<T> {
     // select
     // ----------------------------------------------------------------------------------------------------
     public T get(Long id) {
+        log.info("select database get one data "+id);
         T entity = null;
         try {
             entity = entityClass.newInstance();

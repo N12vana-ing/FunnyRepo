@@ -8,7 +8,13 @@ import com.zykspring.funnycore.system.dto.User;
 import com.zykspring.funnycore.system.service.UserService;
 import com.zykspring.funnycore.util.Dates;
 import com.zykspring.funnycore.util.Results;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -19,13 +25,16 @@ import java.util.List;
  * 用户Controller
  *
  * @version 1.0
- * @author bojiangzhou 2017-12-31
  */
+@Api(tags = "菜单管理")
 @RequestMapping("/sys/user")
 @RestController
 public class UserController extends BaseController {
 
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
+
     @Autowired
+    @Qualifier("UserServiceImpl")
     private UserService userService;
 
 
@@ -35,8 +44,11 @@ public class UserController extends BaseController {
         return Results.successWithData(list, BaseEnums.SUCCESS.code(), BaseEnums.SUCCESS.desc());
     }
 
+    @ApiOperation("查找单个用户")
+    @ApiImplicitParam(name = "Id", value = "用户ID", paramType = "path")
     @RequestMapping("/queryOne/{userId}")
     public Result queryOne(@PathVariable Long userId){
+        log.info("queryOne method!");
         User user = userService.get(userId);
         return Results.successWithData(user);
     }

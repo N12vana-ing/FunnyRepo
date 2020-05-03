@@ -10,7 +10,6 @@ public class Results {
      * Result生成工具类
      *
      * @version 1.0
-     * @author bojiangzhou 2017-12-28
      */
 
     protected Results() {}

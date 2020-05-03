@@ -6,7 +6,6 @@ public class BaseException extends RuntimeException{
      * 基础异常类
      *
      * @version 1.0
-     * @author bojiangzhou 2017-12-31
      */
     private static final long serialVersionUID = -997101946070796354L;
 

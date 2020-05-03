@@ -7,7 +7,6 @@ import java.util.List;
  *
  * @name BaseService
  * @version 1.0
- * @author bojiangzhou 2017-12-31
  */
 public interface Service<T> {
 
