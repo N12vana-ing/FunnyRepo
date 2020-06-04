@@ -1,12 +1,10 @@
 package com.zykspring.funnycore.util;
 
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
+import java.lang.reflect.*;
 
 public class Reflections {
     private static Logger logger = LoggerFactory.getLogger(Reflections.class);
@@ -103,4 +101,25 @@ public class Reflections {
             field.setAccessible(true);
         }
     }
+
+    /**
+     * 获取方法return对象类型
+     *
+     * 目前使用在缓存切面
+     *
+     * @param clazz
+     * @param methodName
+     * @param parameterTypes
+     * @return Method Return Type
+     */
+    public static Type getMethodReturnType(Class clazz,String methodName,Class[] parameterTypes){
+        Method method = null;
+        try {
+            method = clazz.getMethod(methodName,parameterTypes);
+        } catch (Exception e){
+            logger.error("get method return error: || ",e);
+        }
+        return method.getGenericReturnType();
+    }
+
 }

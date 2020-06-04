@@ -19,7 +19,9 @@ public class RedisOperator {
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
     @Autowired
-    private ValueOperations<String, String> valueOperator;
+    private ValueOperations<String, String> valuesOperators;
+    @Autowired
+    private ValueOperations<String, Object> valueOperator;
     @Autowired
     private HashOperations<String, String, Object> hashOperator;
     @Autowired
@@ -71,7 +73,8 @@ public class RedisOperator {
      * @param key key
      */
     public boolean existsKey(String key) {
-        return redisTemplate.hasKey(getFullKey(key));
+        return redisTemplate.hasKey(key);
+//        return redisTemplate.hasKey(getFullKey(key));
     }
 
     /**
@@ -219,7 +222,15 @@ public class RedisOperator {
      *
      * @return ValueOperations
      */
-    public ValueOperations<String, String> getValueOperator() {
+    public ValueOperations<String, String> getValueSOperator() {
+        return valuesOperators;
+    }
+
+    /**
+     *
+     * @return ValueOperations
+     */
+    public ValueOperations<String, Object> getValueOperator() {
         return valueOperator;
     }
 

@@ -1,6 +1,7 @@
 package com.zykspring.funnycore.system.service.impl;
 
 import com.zykspring.funnycore.base.BaseService;
+import com.zykspring.funnycore.plugins.MyRedisAnno;
 import com.zykspring.funnycore.system.dto.User;
 import com.zykspring.funnycore.system.service.UserService;
 import org.slf4j.Logger;
@@ -26,7 +27,8 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
     }
 
     @Override
-    @Cacheable(value="User",key="#id",condition="#id != null",unless="#result == null")
+//    @Cacheable(value="User",key="#id",condition="#id != null",unless="#result == null")
+    @MyRedisAnno
     public User get(Long id) {
         logger.info("in redis get one user "+id);
         return super.get(id);

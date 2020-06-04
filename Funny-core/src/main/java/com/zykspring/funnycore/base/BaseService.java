@@ -41,6 +41,12 @@ public abstract class BaseService<T> implements Service<T> {
     }
 
     @Transactional(rollbackFor = Exception.class)
+    public List<T> insert(long id,List<T> recordList) {
+        mapper.insertList(recordList);
+        return recordList;
+    }
+
+    @Transactional(rollbackFor = Exception.class)
     public List<T> insert(List<T> recordList) {
         mapper.insertList(recordList);
         return recordList;

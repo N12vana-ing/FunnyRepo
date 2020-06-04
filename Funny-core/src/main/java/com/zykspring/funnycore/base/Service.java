@@ -30,6 +30,15 @@ public interface Service<T> {
     List<T> insert(List<T> recordList);
 
     /**
+     * test reflection
+     * 批量插入，null的属性也会保存，不会使用数据库默认值
+     *
+     * @param recordList
+     * @return
+     */
+    List<T> insert(long id,List<T> recordList);
+
+    /**
      * 保存一个实体，null的属性不会保存，会使用数据库默认值
      *
      * @param record

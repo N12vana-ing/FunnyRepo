@@ -6,6 +6,7 @@ import com.zykspring.funnycore.util.Dates;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import javax.persistence.Column;
 import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
@@ -35,7 +36,8 @@ public class BaseDTO implements Serializable {
     /**
      * 数据版本号,每发生update则自增,用于实现乐观锁.
      */
-    private Long versionNumber;
+    @Column(name="VERSION_NUMBER",nullable=false)
+    private Long versionNumber = (long)1;
 
     //
     // 下面是标准 WHO 字段

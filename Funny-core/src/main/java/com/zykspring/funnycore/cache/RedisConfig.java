@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.*;
@@ -54,7 +55,12 @@ public class RedisConfig {
     }
 
     @Bean
-    public ValueOperations<String, String> valueOperations(RedisTemplate<String, String> redisTemplate) {
+    public ValueOperations<String, String> valuesOperations(RedisTemplate<String, String> redisTemplate) {
+        return redisTemplate.opsForValue();
+    }
+
+    @Bean
+    public ValueOperations<String, Object> valueOperations(RedisTemplate<String, Object> redisTemplate) {
         return redisTemplate.opsForValue();
     }
 

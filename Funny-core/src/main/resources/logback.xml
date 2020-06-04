@@ -9,7 +9,7 @@
 <configuration debug="false" scan="false" scanPeriod="5 minutes">
 
     <!-- 引入配置文件 -->
-    <property resource="application.properties"/>
+    <property resource="application.yml"/>
     <property resource="application-${app.env:-dev}.properties"/>
 
     <property name="app.name" value="${app.name:-Funny}"/>
