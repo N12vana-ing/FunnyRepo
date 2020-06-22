@@ -84,7 +84,8 @@ public class RedisAspect<T> {
             valueOperator.set(redisKey,result);
 
         } catch (Throwable throwable) {
-            log.error("select Redis error: ",throwable);
+            log.error("select Redis error: ",throwable.getMessage());
+//            log.error("select Redis error: ",throwable);
             try {
                 result = (BaseDTO)joinPoint.proceed();
             } catch (Throwable throwable1) {
