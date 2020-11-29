@@ -51,6 +51,8 @@ public class User extends BaseDTO {
      */
     private Integer enabled;
 
+    private  Authority authority;
+
 
     public Long getUserId() {
         return userId;
@@ -108,4 +110,11 @@ public class User extends BaseDTO {
         this.enabled = enabled;
     }
 
+    public Authority getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(Authority authority) {
+        this.authority = authority;
+    }
 }

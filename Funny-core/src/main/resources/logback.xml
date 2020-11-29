@@ -13,10 +13,10 @@
     <property resource="application-${app.env:-dev}.properties"/>
 
     <property name="app.name" value="${app.name:-Funny}"/>
-    <property name="app.env" value="${app.env:-dev}"/>
+    <property name="app.env" value="${app.env:-INFO}"/>
 
     <!-- 日志记录级别 -->
-    <property name="logback_level" value="${logback.level:-INFO}"/>
+    <property name="logback_level" value="${logback.level:-DEBUG}"/>
     <!-- 是否输出日志到文件 -->
     <property name="logback_rolling" value="${logback.rolling:-true}"/>
     <!-- 设置日志输出目录 -->

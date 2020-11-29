@@ -34,7 +34,7 @@ public abstract class BaseService<T> implements Service<T> {
     //
     // insert
     // ----------------------------------------------------------------------------------------------------
-    @Transactional(rollbackFor = Exception.class)
+//    @Transactional(rollbackFor = Exception.class)
     public T insert(T record) {
         mapper.insert(record);
         return record;

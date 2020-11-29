@@ -2,9 +2,9 @@ package com.zykspring.funnycore.util;
 
 import com.zykspring.funnycore.base.Result;
 
+import java.util.HashMap;
+
 public class Results {
-
-
 
     /**
      * Result生成工具类
@@ -16,16 +16,15 @@ public class Results {
 
     public static Result newResult() {
         return new Result();
-
     }
 
     public static Result newResult(boolean success) {
         return new Result(success);
     }
 
-    //
-    // 业务调用成功
-    // ----------------------------------------------------------------------------------------------------
+    /**
+     * 业务调用成功
+     */
     public static Result success() {
         return new Result();
     }

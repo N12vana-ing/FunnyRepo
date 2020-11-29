@@ -4,6 +4,8 @@ spring:
   static-locations: classpath:/static
  datasource:
   type: com.alibaba.druid.pool.DruidDataSource
+  hikari:
+    prepStmtCacheSqlLimit: 10000
   write:
     driver-class-name: com.mysql.cj.jdbc.Driver
     jdbc-url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
@@ -78,6 +80,22 @@ spring:
     max-active: 8
     max-wait: -1ms
 
+ kafka:
+   bootstrap-servers: 192.168.0.105:9092
+   consumer:
+     group-id: 0
+     enable-auto-commit: true
+#     key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#     value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+     properties: {session.timeout.ms: 6000}
+   producer:
+#     bootstrap-servers: 192.168.0.105:9091,192.168.0.105:9092,192.168.0.105:9093
+     batch-size: 65536
+     buffer-memory: 524288
+     acks: -1
+#     key-serializer: org.apache.kafka.common.serialization.StringDeserializer
+#     value-serializer: org.apache.kafka.common.serialization.StringDeserializer
+
 mapper:
   identity: MYSQL
   not-empty: false
@@ -86,8 +104,13 @@ mapper:
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
-  mapper-locations: classpath*:**/*Mapper.xml
+  mapper-locations: classpath*:mapper/*.xml
   type-aliases-package: com.zykspring.funnycore.system.dto
 
 server.port: 9090
+server:
+  tomcat:
+    accesslog:
+      directory: /Users/zhouyuankai/Desktop/Funny/log/tomcat
+      enabled: true
 

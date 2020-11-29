@@ -3,10 +3,14 @@ package com.zykspring.funnycore.databaseset;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.ConcurrentHashMap;
+
 public class DataSourceContextHolder {
 
     private static Logger log = LoggerFactory.getLogger(DataSourceContextHolder.class);
     private static final ThreadLocal<String> local = new ThreadLocal<String>();
+    //可替换为线程安全类
+    private static final ConcurrentHashMap concurrentHashMap = new ConcurrentHashMap();
 
     public ThreadLocal<String> getLocal(){ return local;}
 

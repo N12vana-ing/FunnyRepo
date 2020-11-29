@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zykspring.funnycore.system.mapper.MybatisUserMapper">
+
+    <resultMap id="UserResultMap" type="com.zykspring.funnycore.system.dto.User">
+        <result column="USER_ID" jdbcType="BIGINT" property="userId" />
+        <result column="USERNAME" jdbcType="VARCHAR" property="username" />
+        <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+        <result column="NICKNAME" jdbcType="VARCHAR" property="nickname" />
+    </resultMap>
+
+    <select id="selectUserById" resultType="com.zykspring.funnycore.system.dto.User" parameterType="java.lang.Long">
+        select * from sys_user where USER_ID = #{id}
+    </select>
+
+    <insert id="addOneUser" parameterType="com.zykspring.funnycore.system.dto.User" useGeneratedKeys="true" keyProperty="USER_ID">
+        insert into sys_user (USER_ID, USERNAME, PASSWORD, NICKNAME)
+        values(#{userId}, #{username}, #{password}, #{nickname})
+    </insert>
+</mapper>

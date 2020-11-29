@@ -14,6 +14,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import tk.mybatis.spring.mapper.MapperScannerConfigurer;
@@ -63,9 +64,12 @@ public class MyBatisConfig {
         sqlSessionFactory.setDataSource(readWriteDataSource);
         Interceptor[] interceptors = new Interceptor[]{myInterceptor()};
         sqlSessionFactory.setPlugins(interceptors);
+        sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*.xml"));
         return sqlSessionFactory.getObject();
     }
 
+
+//    重写了sqlsessionTemplate后会导致Spring 事务失效，无法回滚，会打印回滚日志，但是无法进行回滚
     @Bean
     public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory){
         return new SqlSessionTemplate(sqlSessionFactory);
