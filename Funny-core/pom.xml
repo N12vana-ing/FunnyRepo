@@ -30,7 +30,7 @@
         <commons.codec.version>1.10</commons.codec.version>
         <commons.lang3.version>3.6</commons.lang3.version>
         <guava.version>23.0</guava.version>
-        <mysql.connect.version>8.0.11</mysql.connect.version>
+        <mysql.connect.version>8.0.28</mysql.connect.version>
         <druid-version>1.1.10</druid-version>
     </properties>
     <!-- ******************************* 自定义变量结束 ********************************** -->
